@@ -3,11 +3,18 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/5mbka78e73xn93jm/branch/master?svg=true)](https://ci.appveyor.com/project/AppAnywhere/conan-libtins/branch/master)
 [![Build Status](https://travis-ci.org/AppAnywhere/conan-libtins.svg?branch=master)](https://travis-ci.org/AppAnywhere/conan-libtins)
 
-# PCAP library is an API for capturing network traffic
+# LIBTINS is a library for sniffing and crafting packets. 
 
 [Conan.io](https://conan.io) package for [libtins](https://github.com/mfontanini/libtins) project
 
 The packages generated with this **conanfile** can be found in [conan.io](https://conan.io/source/libtins/3.5/appanywhere/stable).
+
+## Dependencies
+
+Libtins depends on other libraries:
+* Linux and Mac - libpcap
+* Windows - WinPCAP or NPCAP 
+* OpenSSL - Optional
 
 ## Build packages
 
