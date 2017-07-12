@@ -1,14 +1,15 @@
-project(PackageTest CXX)
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.0.2)
+project(libtins-test CXX)
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
-add_executable(example example.cpp)
-target_link_libraries(example ${CONAN_LIBS})
+file(GLOB SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-# CTest is a testing tool that can be used to test your project.
-# enable_testing()
-# add_test(NAME example
-#          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-#          COMMAND example)
+add_executable(${CMAKE_PROJECT_NAME} ${SOURCE_FILES})
+target_link_libraries(${CMAKE_PROJECT_NAME} ${CONAN_LIBS})
+
+enable_testing()
+add_test(NAME test-libtins-package
+         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+         COMMAND ${CMAKE_PROJECT_NAME})

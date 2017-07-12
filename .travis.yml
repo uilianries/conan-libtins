@@ -4,7 +4,7 @@ env:
      - CONAN_REFERENCE: "libtins/3.5"
      - CONAN_USERNAME: "appanywhere"
      - CONAN_LOGIN_USERNAME: "appanywhere"
-     - CONAN_CHANNEL: "stable"
+     - CONAN_CHANNEL: "ci"
      - CONAN_UPLOAD: "https://bintray.com/appanywhereio/public-conan"
 
 linux: &linux
