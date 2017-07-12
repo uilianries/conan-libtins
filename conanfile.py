@@ -30,7 +30,7 @@ class LibtinsConan(ConanFile):
         if self.options.enable_ack_tracker or self.options.enable_tcp_stream_custom_data:
             self.requires.add("Boost/1.64.0@inexorgame/stable")
 
-    def build_requirements(self):
+    def system_requirements(self):
         if self.settings.os == "Linux" and self.options.enable_pcap:
             package_tool = tools.SystemPackageTool()
             package_tool.install("libpcap-dev")
@@ -66,9 +66,11 @@ CONAN_BASIC_SETUP()
         self.copy("LICENSE", dst=".", keep_path=False)
         self.copy("*.h", dst="include", src=os.path.join("libtins-%s" % self.version, "include"))
         self.copy("*.dll", dst="bin", keep_path=False)
-        self.copy("*.so", dst="lib", keep_path=False)
+        self.copy("*.so*", dst="lib", keep_path=False)
         self.copy("*.dylib", dst="lib", keep_path=False)
         self.copy("*.a", dst="lib", keep_path=False)
 
     def package_info(self):
         self.cpp_info.libs = self.collect_libs()
+        if self.settings.os == "Linux" and self.options.enable_pcap:
+            self.cpp_info.libs.extend(["pcap", "pthread"])
