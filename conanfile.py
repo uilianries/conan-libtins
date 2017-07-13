@@ -32,8 +32,15 @@ class LibtinsConan(ConanFile):
 
     def system_requirements(self):
         if self.settings.os == "Linux" and self.options.enable_pcap:
+            libpcap = "libpcap0.8-dev"
+            if self.settings.arch == "x86":
+                libpcap = "libpcap0.8-dev:i386"
             package_tool = tools.SystemPackageTool()
-            package_tool.install("libpcap-dev")
+            package_tool.install(libpcap)
+            # XXX: Should be fixed
+            if self.settings.arch == "x86":
+                self.run("sudo ln -f -s /usr/lib/i386-linux-gnu/libpcap.a /usr/local/lib/libpcap.a")
+
 
     def source(self):
         tar_name = "v%s.tar.gz" % self.version
